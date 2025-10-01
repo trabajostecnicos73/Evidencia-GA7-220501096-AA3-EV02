@@ -1,0 +1,56 @@
+/* --------------------
+     REGISTRO.CSS - Estilos específicos para Registro
+-------------------- */
+
+/* Contenedor específico para registro */
+.container-registro {
+    width: 100%;
+    max-height: auto;
+    padding: 20px;
+    background: #000;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 70px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Título específico para registro */
+.titulo-registro {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 40px;
+}
+
+/* Estilos para checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    background-color: #555;
+    vertical-align: middle;
+    position: relative;
+    top: 1px;
+}
+
+/* Estado marcado del checkbox */
+input[type="checkbox"]:checked {
+    background-color: #ccc;
+    border-color: #ccc;
+}
+
+/* Estilos para términos y condiciones */
+.terminos-enlace {
+    text-decoration: underline;
+    color: #ccc;
+}
+
+.color-acepto {
+    color: #FFFFFF;
+}

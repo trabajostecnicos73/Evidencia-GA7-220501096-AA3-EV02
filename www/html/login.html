@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | SmartParking</title>
+    <!-- Mantenemos tus referencias a archivos CSS -->
+    <link rel="stylesheet" href="/www/css/general.css">
+    <link rel="stylesheet" href="/www/css/login.css">
+    <!-- Si usas registro.css, puedes mantenerlo si afecta estilos globales -->
+</head>
+<body>
+    <div class="container">
+        <div class="sub-container">
+            
+            <img src="/www/img/logotipo-SmartParking.jpg" alt="SmartParking Logo" class="logo">
+            
+            <h1>Iniciar Sesión</h1>
+
+            <!-- 1. Añadimos un ID al formulario para capturarlo en JavaScript -->
+            <!-- 2. Quitamos action="/login" ya que lo manejaremos con JavaScript -->
+            <form id="loginForm" action="#" method="post">
+                <!-- 3. Cambiamos el ID a 'correo' para que coincida con el backend -->
+                <label for="correo">Correo Electrónico:</label>
+                <input type="text" id="correo" name="correo" required placeholder="tu.correo@ejemplo.com">
+
+                <!-- 4. Cambiamos el ID a 'contraseña' para que coincida con el backend -->
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required placeholder="Ingresa tu contraseña">
+
+                <a href="recuperar_contrasena.html" class="enlace-olvido">¿Olvidaste tu contraseña?</a>
+
+                <!-- 5. Movemos el botón dentro del formulario para que sea el trigger de submit -->
+                <button type="submit">ENTRAR</button>
+            </form>
+
+            <a href="registro.html" class="resgistro">¿No tienes cuenta? Regístrate</a>
+
+            <!-- Área de mensajes para feedback del servidor -->
+            <div id="mensaje" style="margin-top: 20px; padding: 10px; text-align: center; border-radius: 5px; font-size: 0.9rem; display: none;"></div>
+        </div>
+        
+    </div>
+    
+    <!-- 🔽 SCRIPT para enviar datos al backend -->
+    <script>
+        // 🚨 URL del endpoint de Login
+        const API_URL_LOGIN = "http://localhost:3000/api/usuarios/login";
+        const form = document.getElementById("loginForm");
+        const mensajeDiv = document.getElementById("mensaje");
+
+        // Función auxiliar para mostrar mensajes (copiada de registro.html para consistencia)
+        function mostrarMensaje(texto, esError = true) {
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.backgroundColor = esError ? '#f8d7da' : '#d4edda';
+            mensajeDiv.style.color = esError ? '#721c24' : '#155724';
+            mensajeDiv.style.display = 'block';
+        }
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault(); // Evita el envío tradicional del formulario
+
+            // 1. Recolección de datos: usamos los IDs 'correo' y 'contraseña'
+            const datos = {
+                correo: document.getElementById("correo").value,
+                contraseña: document.getElementById("contraseña").value 
+            };
+            
+            // Limpiamos el mensaje anterior
+            mensajeDiv.style.display = 'none';
+
+            try {
+                // 2. Petición POST al backend
+                const res = await fetch(API_URL_LOGIN, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(datos)
+                });
+
+                // 3. Procesamiento de la respuesta
+                const resultado = await res.json();
+                
+                if (res.ok) {
+                    // Éxito (Status 200)
+                    mostrarMensaje(`¡Bienvenido ${resultado.usuario.nombre}! Inicio de sesión exitoso.`, false);
+                    // Opcional: Guardar token o redirigir a la página principal
+                    // window.location.href = 'dashboard.html';
+                } else {
+                    // Error de autenticación (401) o de servidor (500)
+                    // El backend devuelve: 'Credenciales inválidas (correo o contraseña).'
+                    mostrarMensaje(`Error al iniciar sesión: ${resultado.error || 'Credenciales inválidas.'}`, true);
+                }
+
+            } catch (error) {
+                // Error de red (servidor apagado o URL incorrecta)
+                console.error("Error de red/conexión:", error);
+                mostrarMensaje("Error de conexión: Asegúrate de que tu servidor Node.js esté funcionando.", true);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario | SmartParking</title>
+    
+    <!-- Mantenemos tus referencias a archivos CSS -->
+    <link rel="stylesheet" href="/www/css/general.css">
+    <link rel="stylesheet" href="/www/css/login.css">
+    <link rel="stylesheet" href="/www/css/registro.css">
+    
+</head>
+<body>
+    <div class="container">
+
+        <a href="../index.html">
+            <img src="../svg/inicio.svg" alt="Icono de inicio" class="icono-inicio">
+        </a>
+        
+        <div class="container-registro">
+        
+            <h3 class="titulo-registro">Registro</h3>
+
+            <!-- 💡 1. Se añade el ID "registroForm" para que el script pueda capturar el evento -->
+            <form id="registroForm" action="#" method="post"> 
+                
+                <input type="text" id="nombre" name="nombre" required placeholder="Nombre">
+
+                <input type="text" id="apellido" name="apellido" required placeholder="Apellido">
+
+                <input type="text" id="cedula" name="cedula" required placeholder="No. Cedula">
+
+                <input type="text" id="telefono" name="telefono" required placeholder="Telefono">
+
+                <input type="text" id="correo" name="correo" required placeholder="Correo Electronico">
+
+                <!-- 💡 2. ID cambiado a "contraseña" (acorde a tu backend) -->
+                <input type="password" id="contraseña" name="contraseña" required placeholder="Contraseña">
+
+                <!-- 💡 3. ID cambiado a "confirmar" (acorde a tu backend) -->
+                <input type="password" id="confirmar" name="confirmar" required placeholder="Confirmar Contraseña">
+
+                <!-- 💡 4. Se mueve el botón DENTRO del formulario para que funcione el submit -->
+                <button type="submit" id="btnRegistrarse">REGISTRARSE</button>
+            </form>
+
+            <!-- Este contenido estaba fuera, lo dejamos así para no romper tu layout CSS, 
+                 pero el botón de registro debe estar asociado al formulario -->
+            <p>
+                <a href="terminos.html" class="terminos-enlace">Términos y Condiciones</a>
+                <br>
+                <span class="color-acepto">Acepto</span> <input type="checkbox" id="acepto-terminos">
+            </p>
+
+            <a href="login.html" class="tengo">Ya tengo una cuenta</a>
+
+            <!-- Área de mensajes, útil para mostrar errores o éxito del backend -->
+            <div id="mensaje" style="margin-top: 15px; padding: 10px; text-align: center; border-radius: 5px; font-size: 0.9rem;"></div>
+        </div>
+        
+    </div>
+    
+    <!-- 🔽 SCRIPT para enviar datos al backend (Corregido) -->
+    <script>
+        // 🚨 URL CORREGIDA: Incluye el prefijo /api/usuarios
+        const API_URL_REGISTRO = "http://localhost:3000/api/usuarios/registro";
+        const form = document.getElementById("registroForm");
+        const mensajeDiv = document.getElementById("mensaje");
+
+        // Función auxiliar para mostrar mensajes
+        function mostrarMensaje(texto, esError = true) {
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.backgroundColor = esError ? '#f8d7da' : '#d4edda'; // Rojo claro para error, Verde claro para éxito
+            mensajeDiv.style.color = esError ? '#721c24' : '#155724'; // Texto oscuro
+            mensajeDiv.style.display = 'block';
+        }
+
+
+        // El listener ahora apunta al ID correcto del formulario
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault(); // Detiene el envío normal del formulario
+
+            // 1. Recolección de datos: usamos los nuevos IDs corregidos
+            const datos = {
+                nombre: document.getElementById("nombre").value,
+                apellido: document.getElementById("apellido").value,
+                cedula: document.getElementById("cedula").value,
+                telefono: document.getElementById("telefono").value,
+                correo: document.getElementById("correo").value,
+                contraseña: document.getElementById("contraseña").value, // Nuevo ID
+                confirmar: document.getElementById("confirmar").value    // Nuevo ID
+            };
+
+            // Validación básica del frontend (aunque el backend ya valida las contraseñas)
+            if (datos.contraseña !== datos.confirmar) {
+                return mostrarMensaje("Error de validación: Las contraseñas no coinciden.", true);
+            }
+            
+            // Limpiamos el mensaje anterior
+            mensajeDiv.style.display = 'none';
+
+            try {
+                // 2. Petición POST al backend
+                const res = await fetch(API_URL_REGISTRO, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(datos)
+                });
+
+                // 3. Procesamiento de la respuesta
+                const resultado = await res.json();
+                
+                if (res.ok) {
+                    // Éxito (Status 200)
+                    mostrarMensaje(`¡Usuario registrado correctamente! ID: ${resultado.id}`, false);
+                    form.reset(); // Limpia el formulario
+                } else {
+                    // Error de validación (400) o de servidor (500)
+                    mostrarMensaje(`Error: ${resultado.error || 'Fallo desconocido en el servidor.'}`, true);
+                }
+
+            } catch (error) {
+                // Error de conexión (servidor apagado o URL incorrecta)
+                console.error("Error de red/conexión:", error);
+                mostrarMensaje("Error de conexión: Asegúrate de que tu servidor Node.js esté funcionando.", true);
+            }
+        });
+    </script>
+</body>
+</html>

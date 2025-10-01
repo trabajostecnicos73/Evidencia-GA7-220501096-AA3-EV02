@@ -1,0 +1,101 @@
+/* --------------------
+     LOGIN.CSS - Estilos específicos para Login
+-------------------- */
+
+/* Sub-contenedor específico para login */
+.sub-container {
+    width: 100%;
+    min-height: 80%;
+    padding: 20px;
+    background: #000;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Logo específico para login */
+.sub-container img {
+    position: absolute;
+    top: -75px;
+    margin-top: 10px;
+}
+
+/* Título específico para login */
+.sub-container h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 80px;
+    text-shadow: 2px 2px 4px #83e40d;
+}
+
+/* Estilos del formulario de login */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Etiquetas del formulario */
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    font-size: 18px;
+}
+
+/* Efecto focus en campos de entrada */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Enlace de contraseña olvidada */
+.enlace-olvido {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.enlace-olvido:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Sección de registro */
+.resgistro {
+    margin-top: 20px;
+    text-align: center;
+}

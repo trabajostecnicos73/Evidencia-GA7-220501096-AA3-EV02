@@ -1,0 +1,131 @@
+/* --------------------
+     GENERAL.CSS - Estilos Generales
+-------------------- */
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Contenedor Principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para Botones */
+button {
+    display: block;
+    width: 200px;
+    padding: 20px;
+    margin: 20px auto;
+    font-size: 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+.boton-estilo:hover {
+    background-color: #004085;
+}
+
+/* Estilos para Enlaces */
+.enlace-olvido {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.enlace-olvido:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para Imágenes */
+img {
+    display: block;
+    margin: 10px auto 20px;
+    max-width: 250px;
+    border-radius: 10px;
+}
+
+img.logo {
+    width: 150px;
+    height: auto;
+}
+
+/* Estilos para Iconos */
+.icono-inicio {
+    display: block;
+    max-width: 50px;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+/* Tipografía */
+h1 {
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 0;
+    text-shadow: 2px 2px 4px #888888;
+}
+
+h2 {
+    color: #000;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        width: 99%;
+        padding: 5px;
+    }
+    
+    h1 {
+        font-size: 2.2em;
+    }
+    
+    button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 769px) {
+    .container {
+        width: 60%;
+    }
+    
+    h1 {
+        font-size: 2.8em;
+    }
+}

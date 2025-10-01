@@ -1,0 +1,74 @@
+/* --------------------
+     BIENVENIDA.CSS - Estilos específicos para página de Bienvenida
+-------------------- */
+
+/* Contenedor específico para bienvenida */
+.container-bienvenida {
+    width: 100%;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* Título de bienvenida */
+.titulo-bienvenida {
+    color: #FFFFFF;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtítulo de bienvenida */
+.subtitulo-bienvenida {
+    color: #f0f0f0;
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Botones específicos para bienvenida */
+.boton-bienvenida {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.boton-bienvenida:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    background: linear-gradient(45deg, #34ce57, #26d4aa);
+}
+
+/* Cards de información */
+.card-info {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-info h3 {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.card-info p {
+    color: #f0f0f0;
+    font-size: 14px;
+    line-height: 1.5;
+}
