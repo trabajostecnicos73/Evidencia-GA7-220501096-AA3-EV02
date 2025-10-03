@@ -29,11 +29,11 @@
 
                 <input type="text" id="apellido" name="apellido" required placeholder="Apellido">
 
-                <input type="text" id="cedula" name="cedula" required placeholder="No. Cedula">
+                <input type="number" id="cedula" name="cedula" required placeholder="No. Cedula">
 
-                <input type="text" id="telefono" name="telefono" required placeholder="Telefono">
+                <input type="number" id="telefono" name="telefono" required placeholder="Telefono">
 
-                <input type="text" id="correo" name="correo" required placeholder="Correo Electronico">
+                <input type="email" id="correo" name="correo" required placeholder="Correo Electronico">
 
                 <!-- 💡 2. ID cambiado a "contraseña" (acorde a tu backend) -->
                 <input type="password" id="contraseña" name="contraseña" required placeholder="Contraseña">
@@ -95,6 +95,17 @@
             // Validación básica del frontend (aunque el backend ya valida las contraseñas)
             if (datos.contraseña !== datos.confirmar) {
                 return mostrarMensaje("Error de validación: Las contraseñas no coinciden.", true);
+            }
+
+            //  BLOQUE DE VALIDACIÓN STRICTA 
+            const soloNumerosRegex = /^[0-9]+$/; 
+
+            if (!soloNumerosRegex.test(datos.cedula)) {
+                return mostrarMensaje("Error: La cédula solo debe contener números (sin espacios, guiones o puntos).", true);
+            }
+
+            if (!soloNumerosRegex.test(datos.telefono)) {
+                return mostrarMensaje("Error: El teléfono solo debe contener números (0-9).", true);
             }
             
             // Limpiamos el mensaje anterior
